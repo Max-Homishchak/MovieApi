@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Api</title>
+</head>
+<body>
+
+    <style>
+        body{
+            background-color: #131517;
+        }
+        .box{
+            margin:auto;
+            margin-top: 20%;
+            font-family: 'Open Sans', sans-serif;
+            width: 350px;
+        }
+        #MovieName, #MovieRate{
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #252e38;
+            color: #fff;
+            outline: 0;
+            border: 0;
+            font-size: 1.3em;
+        }
+        #MovieName, #MovieRate{
+            border-bottom: 2px solid #6023E2;
+            width: 250px;
+        }
+        .button {
+            margin-top: 50px;
+            background-color: #252e38;
+            border: 3px solid #6023E2;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .button:hover{
+            color: #fff;
+            background-color: #6023E2;
+        }
+    </style>
+
+    <div class="box">
+        <form method="post">
+            <input id="MovieName" type="text" name="name" placeholder="Name">
+            <input id="MovieRate" type="text" name="rate" placeholder="Rate">
+            <button class="button">Create</button>
+            <button style="width: 126px; margin-left:20px;" class="button" formaction="/getMovies">View</button>
+        </form>
+    </div>
+
+
+
+
+</body>
+</html>
