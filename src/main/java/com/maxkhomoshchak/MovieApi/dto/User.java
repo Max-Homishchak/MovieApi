@@ -7,25 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@Builder
+@Data
 @Entity
-@Table(name = "Movies")
-public class Movie {
+@Table(name = "Users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private double rate;
-    private int voters;
-
-    @Override
-    public boolean equals(Object object) {
-        return this.name.equals(((Movie)object).name);
-    }
-
+    String nickName;
+    String eMail;
+    String password;
+    boolean isVip;
 }

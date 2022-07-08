@@ -1,7 +1,7 @@
 package com.maxkhomoshchak.MovieApi.service;
 
-import com.maxkhomoshchak.MovieApi.dao.MovieDao;
 import com.maxkhomoshchak.MovieApi.dto.Movie;
+import com.maxkhomoshchak.MovieApi.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,20 +12,16 @@ import java.util.List;
 @Service
 public class MoviesService {
 
-    private MovieDao movieDao;
-
     @Autowired
-    public MoviesService(MovieDao movieDao) {
-        this.movieDao = movieDao;
-    }
+    private MovieRepository movieRepository;
 
     public boolean checkExistance(Movie movie){
-        return movieDao.findAll().contains(movie);
+        return movieRepository.findAll().contains(movie);
     }
 
     public void submitMovie(Movie movie){
 
-        List<Movie> movieList = movieDao.findAll();
+        List<Movie> movieList = movieRepository.findAll();
 
         String movieName = (movie.getName()).toLowerCase();
 
@@ -39,11 +35,12 @@ public class MoviesService {
 
         if(checkExistance(movie)){
 
-            int index = movieList.indexOf(movie);
+            Movie movie1 = movieRepository.findByName(movieName);
+            Movie movie2 = movieRepository.getOne(movie1.getId());
 
-            int amountOfVoters = movieList.get(index).getVoters();;
+            int amountOfVoters = movie1.getVoters() + 1;
 
-            double oldRate = movieList.get(index).getRate();
+            double oldRate = movie1.getRate();
 
             double newRate = ((oldRate * amountOfVoters) + movie.getRate())/(amountOfVoters + 1);
 
@@ -52,15 +49,18 @@ public class MoviesService {
 
             double resultRate = fixedRate.doubleValue();
 
-            movie.setRate(resultRate);
-            movie.setVoters(++amountOfVoters);
+            movie2.setName(movieName);
+            movie2.setRate(resultRate);
+            movie2.setVoters(amountOfVoters);
 
-            movieDao.update(movie, movieName);
+            movieRepository.save(movie2);
+//            movieRepository.updateMovie(movieName, resultRate, amountOfVoters, movie1.getId());
 
         }else{
-            movieDao.create(Movie.builder()
+            movieRepository.save(Movie.builder()
                     .name(movieName)
                     .rate(movie.getRate())
+                    .voters(1)
                     .build());
         }
     }

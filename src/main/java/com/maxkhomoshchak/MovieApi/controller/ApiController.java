@@ -1,7 +1,7 @@
 package com.maxkhomoshchak.MovieApi.controller;
 
-import com.maxkhomoshchak.MovieApi.dao.MovieDao;
 import com.maxkhomoshchak.MovieApi.dto.Movie;
+import com.maxkhomoshchak.MovieApi.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +13,12 @@ import java.util.List;
 @RequestMapping
 public class ApiController {
 
-    private MovieDao movieDao;
-
     @Autowired
-    public ApiController(MovieDao movieDao) {
-        this.movieDao = movieDao;
-    }
+    MovieRepository movieRepository;
 
     @GetMapping("/MoviesApi")
     public List<Movie> UsersData(){
 
-        return movieDao.findAll();
+        return movieRepository.findAll();
     }
 }
