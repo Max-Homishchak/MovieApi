@@ -1,10 +1,9 @@
 package com.maxkhomoshchak.MovieApi.controller;
 
-import com.maxkhomoshchak.MovieApi.dao.UserDao;
-import com.maxkhomoshchak.MovieApi.dto.Movie;
-import com.maxkhomoshchak.MovieApi.dto.User;
-import com.maxkhomoshchak.MovieApi.repository.UserRepository;
-import com.maxkhomoshchak.MovieApi.service.MoviesService;
+import com.maxkhomoshchak.MovieApi.domain.Movie;
+import com.maxkhomoshchak.MovieApi.domain.User;
+import com.maxkhomoshchak.MovieApi.service.MovieService;
+import com.maxkhomoshchak.MovieApi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ViewController {
 
-    private MoviesService moviesService;
+    private MovieService movieService;
+    private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    public ViewController(MovieService movieService, UserService userService) {
 
-    @Autowired
-    public ViewController(MoviesService moviesService) {
-        this.moviesService  = moviesService;
+        this.movieService = movieService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -34,9 +33,17 @@ public class ViewController {
     }
 
     @PostMapping
-    public String submit(Movie movie, User user){
+    public String submit(Movie movie){
 
-        moviesService.submitMovie(movie);
+        movieService.submitMovie(movie);
+
+        return "redirect:/Success";
+    }
+
+    @PostMapping("/createUser")
+    public String createUser(User user){
+
+        userService.create(user);
 
         return "redirect:/Success";
     }
@@ -47,9 +54,16 @@ public class ViewController {
         return "redirect:/";
     }
 
+
     @PostMapping("/getMovies")
     public String viewMovies(){
 
         return "redirect:/MoviesApi";
+    }
+
+    @PostMapping("/logIn")
+    public String login(){
+
+        return "redirect:/login";
     }
 }
