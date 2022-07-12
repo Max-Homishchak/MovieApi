@@ -1,27 +1,30 @@
 package com.maxkhomoshchak.MovieApi.service;
 
-import com.maxkhomoshchak.MovieApi.dto.Movie;
+import com.maxkhomoshchak.MovieApi.domain.Movie;
 import com.maxkhomoshchak.MovieApi.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.List;
 
 @Service
-public class MoviesService {
+public class MovieServiceImpl implements MovieService{
+
+    private MovieRepository movieRepository;
 
     @Autowired
-    private MovieRepository movieRepository;
+    public MovieServiceImpl(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     public boolean checkExistance(Movie movie){
         return movieRepository.findAll().contains(movie);
     }
 
     public void submitMovie(Movie movie){
-
-        List<Movie> movieList = movieRepository.findAll();
 
         String movieName = (movie.getName()).toLowerCase();
 
@@ -36,25 +39,24 @@ public class MoviesService {
         if(checkExistance(movie)){
 
             Movie movie1 = movieRepository.findByName(movieName);
-            Movie movie2 = movieRepository.getOne(movie1.getId());
 
             int amountOfVoters = movie1.getVoters() + 1;
 
+
             double oldRate = movie1.getRate();
 
-            double newRate = ((oldRate * amountOfVoters) + movie.getRate())/(amountOfVoters + 1);
+            double newRate = ((oldRate * (amountOfVoters - 1)) + movie.getRate())/(amountOfVoters);
 
             BigDecimal fixedRate = new BigDecimal(newRate);
             fixedRate = fixedRate.setScale(2, RoundingMode.HALF_UP);
 
-            double resultRate = fixedRate.doubleValue();
+            newRate = fixedRate.doubleValue();
 
-            movie2.setName(movieName);
-            movie2.setRate(resultRate);
-            movie2.setVoters(amountOfVoters);
+            movie1.setName(movieName);
+            movie1.setRate(newRate);
+            movie1.setVoters(amountOfVoters);
 
-            movieRepository.save(movie2);
-//            movieRepository.updateMovie(movieName, resultRate, amountOfVoters, movie1.getId());
+            movieRepository.save(movie1);
 
         }else{
             movieRepository.save(Movie.builder()
@@ -63,5 +65,15 @@ public class MoviesService {
                     .voters(1)
                     .build());
         }
+    }
+
+    @Override
+    public List<Movie> getMovies() {
+
+        List<Movie> movieList = movieRepository.findAll();
+
+        Collections.sort(movieList);
+
+        return movieList;
     }
 }

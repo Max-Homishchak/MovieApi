@@ -1,4 +1,4 @@
-package com.maxkhomoshchak.MovieApi.dto;
+package com.maxkhomoshchak.MovieApi.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Entity
 @Table(name = "Movies")
-public class Movie {
+public class Movie implements Comparable<Movie>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,11 @@ public class Movie {
     @Override
     public boolean equals(Object object) {
         return this.name.equals(((Movie)object).name);
+    }
+
+    public int compareTo(Movie movie) {
+
+        return (int)((this.id).compareTo(movie.getId()));
     }
 
 }
