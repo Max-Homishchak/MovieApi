@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies Api</title>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
 </head>
 <body>
-
     <style>
         body{
             background-color: #131517;
@@ -17,7 +17,7 @@
             font-family: 'Open Sans', sans-serif;
             width: 350px;
         }
-        #MovieName, #MovieRate{
+        #UserName, #UserPassword, #UserEMail{
             margin-top: 20px;
             padding: 10px;
             background-color: #252e38;
@@ -44,20 +44,15 @@
             background-color: #6023E2;
         }
     </style>
-
     <div class="box">
         <form method="post">
-
-            <input id="MovieName" type="text" name="name" placeholder="Name">
-            <input id="MovieRate" type="text" name="rate" placeholder="Rate">
+            <input id="UserName" type="text" name="userName" placeholder="nickname">
+            <input id="UserPassword" type="text" name="password" placeholder="password">
+            <input id="UserEMail" type="text" name="eMail" placeholder="email">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button class="button">Create</button>
-            <button style="width: 126px; margin-left:20px;" class="button" formaction="/getMovies">View</button>
+            <button class="button" formaction="/createUser">Sing in</button>
+            <button style="width: 126px; margin-left:20px;" class="button" formaction="/logIn">Log in</button>
         </form>
     </div>
-
-
-
-
 </body>
 </html>
