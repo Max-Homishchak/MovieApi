@@ -17,8 +17,13 @@
             font-family: 'Open Sans', sans-serif;
             width: 350px;
         }
-        #UserName, #UserPassword, #UserEMail{
+        #UserName{
+            margin-top: 5px;
+        }
+        #UserPassword, #UserEmail{
             margin-top: 20px;
+        }
+        #UserName, #UserPassword, #UserEmail{
             padding: 10px;
             background-color: #252e38;
             color: #fff;
@@ -43,16 +48,46 @@
             color: #fff;
             background-color: #6023E2;
         }
+        #result{
+            font-size: 12px;
+            color: red;
+        }
     </style>
     <div class="box">
         <form method="post">
+            <h2 id="result" th:text="${message}"></h2>
             <input id="UserName" type="text" name="userName" placeholder="nickname">
             <input id="UserPassword" type="text" name="password" placeholder="password">
-            <input id="UserEMail" type="text" name="eMail" placeholder="email">
+            <input id="UserEmail" type="text" name="email" placeholder="email">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button class="button" formaction="/createUser">Sing in</button>
-            <button style="width: 126px; margin-left:20px;" class="button" formaction="/logIn">Log in</button>
+            <button class="button" onclick="checkPassword()" formaction="/createUser">Sing in</button>
+            <button style="width: 126px; margin-left:20px;" class="button" formmethod="get" formaction="/login">Log in</button>
         </form>
     </div>
+    <script>
+
+    let message = document.getElementById("result").innerHTML
+
+    switch (message) {
+        case 'Password is too short':
+            document.getElementById('UserPassword').style.borderBottomColor = 'red'
+            break;
+        case 'This username is already used':
+            document.getElementById('UserName').style.borderBottomColor = 'red'
+            break;
+        case 'This email is already used':
+        case 'Email is not valid':
+            document.getElementById('UserEmail').style.borderBottomColor = 'red'
+            break;
+        case 'This email and username are already used':
+            document.getElementById('UserName').style.borderBottomColor = 'red'
+            document.getElementById('UserEmail').style.borderBottomColor = 'red'
+            break;
+
+
+}
+
+
+    </script>
 </body>
 </html>
