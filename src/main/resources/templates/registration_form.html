@@ -13,7 +13,7 @@
         }
         .box{
             margin:auto;
-            margin-top: 20%;
+            margin-top: 18%;
             font-family: 'Open Sans', sans-serif;
             width: 350px;
         }
@@ -49,12 +49,14 @@
             background-color: #6023E2;
         }
         #result{
+            font-family: 'Open Sans', sans-serif;
             font-size: 12px;
             color: red;
         }
     </style>
     <div class="box">
         <form method="post">
+            <h3 style="font-family: 'Open Sans', sans-serif; color: #fff;">Sign in</h3>
             <h2 id="result" th:text="${message}"></h2>
             <input id="UserName" type="text" name="userName" placeholder="nickname">
             <input id="UserPassword" type="text" name="password" placeholder="password">

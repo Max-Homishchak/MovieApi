@@ -17,13 +17,18 @@
         }
         .box{
             margin:auto;
-            margin-top: 16%;
+            margin-top: 14%;
             font-family: 'Open Sans', sans-serif;
             width: 350px;
 
         }
-        #MovieName, #MovieRate{
+        #MovieName{
+            margin-top:5px;
+        }
+        #MovieRate{
             margin-top:20px;
+        }
+        #MovieName, #MovieRate{
             padding: 10px;
             background-color: #252e38;
             color: #fff;
@@ -49,16 +54,16 @@
             background-color: #6023E2;
         }
         #result{
-            margin-left: 44px;
-            font-size: 10px;
-            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
         }
         #header {
-            margin-left: 85%;
+            margin-left: 75%;
             margin-top: 0.1%;
             padding: 1rem 1rem;
         }
         .child {
+            width: 130px;
             display: inline-block;
             vertical-align: middle;
             background-color: #252e38;
@@ -73,23 +78,39 @@
 
         <div id="header">
             <form method="post" th:action="@{/logout}">
-                <button class="child" style="width: 130px; border: 3px solid #6023E2;">Log out</button>
+                <button class="child" style="border: 3px solid #6023E2; margin-right: 10px">Log out</button>
+                <button class="child" style="border: 3px solid red;" formaction="/deleteUser">Delete account</button>
             </form>
         </div>
 
         <div class="box">
             <form method="post">
-
+                <h2 id="result" th:text="${result}"></h2>
                 <input id="MovieName" type="text" name="name" placeholder="Name">
                 <input id="MovieRate" type="text" name="rate" placeholder="Rate">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <button class="button">Create</button>
                 <button style="width: 126px; margin-left:20px;" class="button" formmethod="get" formaction="/api/moviesApi">View</button>
-                <h2 id="result" th:text="${result}"></h2>
             </form>
         </div>
     </div>
+    <script>
 
+        let message = document.getElementById("result").innerHTML
+
+        switch (message) {
+            case 'You have already rated this movie':
+                document.getElementById('MovieName').style.borderBottomColor = 'red'
+                document.getElementById('MovieRate').style.borderBottomColor = 'red'
+                document.getElementById("result").style.color = 'red'
+                break;
+            case 'You have successfully rated this movie':
+                document.getElementById('MovieName').style.borderBottomColor = '#AFE1AF'
+                document.getElementById('MovieRate').style.borderBottomColor = '#AFE1AF'
+                document.getElementById("result").style.color = '#AFE1AF'
+                break;
+        }
+    </script>
 
 </body>
 </html>
