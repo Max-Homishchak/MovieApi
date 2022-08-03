@@ -18,12 +18,14 @@ import java.util.regex.Pattern;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
+    private TransactionService transactionService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TransactionService transactionService) {
+        this.userRepository         = userRepository;
+        this.bCryptPasswordEncoder  = bCryptPasswordEncoder;
+        this.transactionService     = transactionService;
     }
 
     public String create(User user){
@@ -54,6 +56,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return message;
 
     }
+
+    @Override
+    public void delete(User user) {
+
+        transactionService.deleteTransactions(user);
+        userRepository.delete(user);
+    }
+
 
     private boolean checkEmail(String email){
 

@@ -11,4 +11,6 @@ public interface TransactionService {
 
     public String submitTransaction(User user, Movie movie);
 
+    public void deleteTransactions(User user);
+
 }

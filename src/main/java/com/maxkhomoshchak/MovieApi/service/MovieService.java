@@ -1,6 +1,8 @@
 package com.maxkhomoshchak.MovieApi.service;
 
 import com.maxkhomoshchak.MovieApi.domain.Movie;
+import com.maxkhomoshchak.MovieApi.domain.Transaction;
+import com.maxkhomoshchak.MovieApi.domain.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,4 +15,6 @@ public interface MovieService {
     public void submitMovie(Movie movie);
 
     public List<Movie> getMovies();
+
+    public List<Transaction> unrateAllUsersMovies(User user);
 }

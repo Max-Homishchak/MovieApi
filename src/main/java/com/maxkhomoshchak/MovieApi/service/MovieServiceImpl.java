@@ -1,7 +1,10 @@
 package com.maxkhomoshchak.MovieApi.service;
 
 import com.maxkhomoshchak.MovieApi.domain.Movie;
+import com.maxkhomoshchak.MovieApi.domain.Transaction;
+import com.maxkhomoshchak.MovieApi.domain.User;
 import com.maxkhomoshchak.MovieApi.repository.MovieRepository;
+import com.maxkhomoshchak.MovieApi.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +17,13 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService{
 
     private MovieRepository movieRepository;
+    private TransactionRepository transactionRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository) {
+    public MovieServiceImpl(MovieRepository movieRepository, TransactionRepository transactionRepository) {
+
         this.movieRepository = movieRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public boolean checkExistance(Movie movie){
@@ -75,5 +81,38 @@ public class MovieServiceImpl implements MovieService{
         Collections.sort(movieList);
 
         return movieList;
+    }
+
+    @Override
+    public List<Transaction> unrateAllUsersMovies(User user) {
+
+        List<Transaction> transactions = transactionRepository.findAllTransactionByUsername(user.getUsername());
+        System.out.println(transactions);
+
+        for(Transaction t: transactions){
+            unrateMovie(t);
+        }
+
+        return transactions;
+    }
+
+    private void unrateMovie(Transaction transaction){
+
+        Movie movie = movieRepository.findByName((transaction.getMovieName()).toLowerCase());
+
+        if(movie.getVoters() == 1){
+            movieRepository.delete(movie);
+        }else{
+            double newRate = ((movie.getRate() * movie.getVoters()) - transaction.getRate())/(movie.getVoters() - 1);
+
+            BigDecimal fixedRate = new BigDecimal(newRate);
+            fixedRate = fixedRate.setScale(2, RoundingMode.HALF_UP);
+            newRate = fixedRate.doubleValue();
+
+            movie.setVoters(movie.getVoters() - 1);
+            movie.setRate(newRate);
+
+            movieRepository.save(movie);
+        }
     }
 }

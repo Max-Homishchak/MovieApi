@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -63,10 +64,20 @@ public class TransactionServiceImpl implements TransactionService{
         if(saveTransaction(user, movie)){
             result += "You have already rated this movie";
         }else{
-            result += "You have Successfully rated this movie";
+            result += "You have successfully rated this movie";
             movieService.submitMovie(movie);
         }
 
         return result;
+    }
+
+    public void deleteTransactions(User user){
+
+        List<Transaction> transactions = movieService.unrateAllUsersMovies(user);
+
+        for(Transaction t: transactions){
+
+            transactionRepository.deleteById(t.getId());
+        }
     }
 }
