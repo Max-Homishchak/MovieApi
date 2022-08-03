@@ -1,0 +1,41 @@
+#UserName {
+    margin-top: 5px;
+}
+
+#UserPassword, #UserEmail {
+    margin-top: 20px;
+}
+
+#UserName, #UserPassword, #UserEmail {
+    padding: 10px;
+    background-color: #252e38;
+    color: #fff;
+    outline: 0;
+    border: 0;
+    font-size: 1.3em;
+    border-bottom: 2px solid #6023E2;
+    width: 250px;
+}
+
+.button {
+    margin-top: 50px;
+    background-color: #252e38;
+    border: 3px solid #6023E2;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: #6023E2;
+}
+
+#result {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: red;
+}

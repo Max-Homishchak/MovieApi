@@ -1,0 +1,58 @@
+#MovieName {
+    margin-top:5px;
+}
+
+#MovieRate {
+    margin-top:20px;
+}
+
+#MovieName, #MovieRate {
+    padding: 10px;
+    background-color: #252e38;
+    color: #fff;
+    outline: 0;
+    border: 0;
+    font-size: 1.3em;
+    border-bottom: 2px solid #6023E2;
+    width: 250px;
+}
+
+.button {
+    margin-top:20px;
+    background-color: #252e38;
+    border: 3px solid #6023E2;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: #6023E2;
+}
+
+#result {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+}
+
+#header {
+    margin-left: 75%;
+    margin-top: 0.1%;
+    padding: 1rem 1rem;
+}
+
+.child {
+    width: 130px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #252e38;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+}
