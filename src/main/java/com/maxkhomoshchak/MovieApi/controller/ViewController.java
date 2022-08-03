@@ -37,6 +37,11 @@ public class ViewController {
         return "Main";
     }
 
+    @GetMapping("/login")
+    public String loginView(){
+        return "login_form";
+    }
+
     @GetMapping("/register")
     public String registerView(Model model){
         return "registration_form";
@@ -66,5 +71,13 @@ public class ViewController {
 
              return "redirect:/register";
          }
+    }
+
+    @PostMapping("/deleteUser")
+    public String deleteUser(@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes){
+
+        userService.delete(user);
+
+        return "redirect:/logout";
     }
 }
