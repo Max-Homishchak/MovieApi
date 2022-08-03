@@ -11,12 +11,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/register").setViewName("registration_form");
-        registry.addViewController("/Success").setViewName("Success");
 
-        registry.addRedirectViewController("/success", "/Success");
-        registry.addRedirectViewController("/toHomePage", "/");
-
+        registry.addRedirectViewController("/getMovies","/api/moviesApi");
     }
 
     @Bean
