@@ -6,16 +6,15 @@ import com.maxkhomoshchak.MovieApi.domain.User;
 import com.maxkhomoshchak.MovieApi.service.MovieService;
 import com.maxkhomoshchak.MovieApi.service.TransactionService;
 import com.maxkhomoshchak.MovieApi.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class ViewController {
@@ -52,7 +51,15 @@ public class ViewController {
         model.addAttribute("movies", movieService.getMovies());
         return "global_top";
     }
+    @GetMapping("/myTransactions")
+    public String getMyTransactions(@AuthenticationPrincipal User user, Model model) {
 
+        List<Transaction> transactionList = transactionService.getTransactions(user);
+
+        model.addAttribute("times", transactionService.listOfTransactionsTime(transactionList));
+        model.addAttribute("transactions", transactionList);
+        return "my_transactions";
+    }
     @PostMapping
     public String submit(@AuthenticationPrincipal User user, Movie movie, RedirectAttributes redirectAttributes){
 
