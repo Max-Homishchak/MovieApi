@@ -11,10 +11,12 @@
 <body>
     <div id="main_page">
         <div id="header">
-            <form method="post" th:action="@{/logout}">
-                <button class="child" style="border: 3px solid #6023E2; margin-right: 10px" formmethod="get" formaction="/api/moviesApi">See Api</button>
-                <button class="child" style="border: 3px solid #6023E2; margin-right: 10px" >Log out</button>
-                <button class="childD" style="border: 3px solid red;" formaction="/deleteUser">Delete account</button>
+            <form method="get" th:action="@{/logout}">
+
+                <button class="child" style="border: 3px solid #6023E2;" formmethod="get" formaction="/myTransactions">MyTransactions</button>
+                <button class="child" style="border: 3px solid #6023E2; margin-left: 10px" formmethod="get" formaction="/api/moviesApi">See Api</button>
+                <button class="child" style="border: 3px solid #6023E2; margin-left: 10px" >Log out</button>
+                <button class="childD" style="border: 3px solid red; margin-left: 10px" formaction="/deleteUser">Delete account</button>
             </form>
         </div>
         <div class="box">

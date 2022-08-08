@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
 
-    <link href="../static/css/common_styles.css" th:href="@{/css/global_top.css}" rel="stylesheet" />
+    <link href="../static/css/common_styles.css" th:href="@{/css/my_transactions.css}" rel="stylesheet" />
     <link href="../static/css/login_form.css" th:href="@{/css/common_styles.css}" rel="stylesheet" />
     <title>Title</title>
 </head>
 <body>
-    <table>
+<table>
         <div id="getBackButton">
             <form method="get">
                 <button style="width: 126px;" class="button" formaction="/">Back</button>
             </form>
-            <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 15px;">Global Rating</h3>
+            <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 15px;">Your Submitted</h3>
         </div>
 
 
         <tr>
             <th scope="col">Movie</th>
-            <th scope="col">average rate</th>
-            <th scope="col">amount of voters</th>
+            <th scope="col">Your rate</th>
+            <th scope="col">Created</th>
         </tr>
-        <tr class="movies" th:each="movie: ${movies}">
-            <td th:text="${movie.name}" />
-            <td th:text="${movie.rate}" />
-            <td th:text="${movie.voters}" />
+        <tr class="transactions" th:each="transaction,iterStat: ${transactions}">
+            <td th:text="${transaction.movieName}" />
+            <td th:text="${transaction.rate}" />
+            <td th:text="${times[iterStat.index]}"/>
         </tr>
     </table>
-
 </body>
 </html>
