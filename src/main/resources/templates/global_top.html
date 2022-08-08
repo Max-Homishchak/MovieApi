@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="../static/css/common_styles.css" th:href="@{/css/global_top.css}" rel="stylesheet" />
+    <link href="../static/css/login_form.css" th:href="@{/css/common_styles.css}" rel="stylesheet" />
+    <title>Title</title>
+</head>
+<body>
+    <table>
+
+        <div id="getBackButton">
+            <form method="get">
+                <button style="width: 126px;" class="button" formaction="/">Back</button>
+            </form>
+        </div>
+
+
+        <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">average rate</th>
+            <th scope="col">amount of voters</th>
+        </tr>
+        <tr class="movies" th:each="movie: ${movies}">
+            <td th:text="${movie.name}" />
+            <td th:text="${movie.rate}" />
+            <td th:text="${movie.voters}" />
+        </tr>
+    </table>
+
+</body>
+</html>

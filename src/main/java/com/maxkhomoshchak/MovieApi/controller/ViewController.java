@@ -20,14 +20,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ViewController {
 
-//    private MovieService movieService;
+    private MovieService movieService;
     private UserService userService;
     private TransactionService transactionService;
 
     @Autowired
-    public ViewController(/*MovieService movieService,*/ UserService userService, TransactionService transactionService) {
+    public ViewController(MovieService movieService, UserService userService, TransactionService transactionService) {
 
-//        this.movieService = movieService;
+        this.movieService = movieService;
         this.userService = userService;
         this.transactionService = transactionService;
     }
@@ -45,6 +45,12 @@ public class ViewController {
     @GetMapping("/register")
     public String registerView(Model model){
         return "registration_form";
+    }
+
+    @GetMapping("/listMovies")
+    public String listStudent(Model model) {
+        model.addAttribute("movies", movieService.getMovies());
+        return "global_top";
     }
 
     @PostMapping

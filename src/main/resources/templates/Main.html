@@ -12,8 +12,9 @@
     <div id="main_page">
         <div id="header">
             <form method="post" th:action="@{/logout}">
-                <button class="child" style="border: 3px solid #6023E2; margin-right: 10px">Log out</button>
-                <button class="child" style="border: 3px solid red;" formaction="/deleteUser">Delete account</button>
+                <button class="child" style="border: 3px solid #6023E2; margin-right: 10px" formmethod="get" formaction="/api/moviesApi">See Api</button>
+                <button class="child" style="border: 3px solid #6023E2; margin-right: 10px" >Log out</button>
+                <button class="childD" style="border: 3px solid red;" formaction="/deleteUser">Delete account</button>
             </form>
         </div>
         <div class="box">
@@ -23,7 +24,7 @@
                 <input id="MovieRate" type="text" name="rate" placeholder="Rate">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <button class="button">Create</button>
-                <button style="width: 126px; margin-left:20px;" class="button" formmethod="get" formaction="/api/moviesApi">View</button>
+                <button style="margin-left:10px;" class="button" formmethod="get" formaction="listMovies">See Top</button>
             </form>
         </div>
     </div>
