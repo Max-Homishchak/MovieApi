@@ -30,7 +30,7 @@ public class Movie implements Comparable<Movie>{
 
     public int compareTo(Movie movie) {
 
-        return (int)((this.id).compareTo(movie.getId()));
+        return movie.getVoters() - this.voters;
     }
 
 }
