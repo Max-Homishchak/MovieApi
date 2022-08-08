@@ -8,6 +8,7 @@ body {
 }
 
 .box {
+    text-align: center;
     margin:auto;
     margin-top: 14%;
     font-family: 'Open Sans', sans-serif;

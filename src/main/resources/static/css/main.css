@@ -14,10 +14,11 @@
     border: 0;
     font-size: 1.3em;
     border-bottom: 2px solid #6023E2;
-    width: 250px;
+    width: 254px;
 }
 
 .button {
+    width: 129px;
     margin-top:20px;
     background-color: #252e38;
     border: 3px solid #6023E2;
@@ -40,12 +41,13 @@
 }
 
 #header {
-    margin-left: 75%;
+    text-align: center;
+    margin-left: 68%;
     margin-top: 0.1%;
     padding: 1rem 1rem;
 }
 
-.child {
+.child, .childD {
     width: 130px;
     display: inline-block;
     vertical-align: middle;
@@ -55,4 +57,14 @@
     text-align: center;
     text-decoration: none;
     font-size: 14px;
+}
+
+.child:hover {
+    color: #fff;
+    background-color: #6023E2;
+}
+
+.childD:hover {
+    color: #fff;
+    background-color: red;
 }
