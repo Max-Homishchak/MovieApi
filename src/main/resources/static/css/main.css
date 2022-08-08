@@ -41,12 +41,13 @@
 }
 
 #header {
+    margin-left: 10px;
     margin-top: 0.1%;
     padding: 1rem 1rem;
 }
 
 .child, .childD {
-    width: 130px;
+    width: 150px;
     display: inline-block;
     vertical-align: middle;
     background-color: #252e38;
@@ -56,7 +57,13 @@
     text-decoration: none;
     font-size: 14px;
 }
-
+.child{
+    border: 3px solid #6023E2;
+}
+.childD{
+    border: 3px solid red;
+    margin-left: 10px;
+}
 .child:hover {
     color: #fff;
     background-color: #6023E2;
