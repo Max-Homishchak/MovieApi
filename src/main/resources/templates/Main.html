@@ -11,7 +11,7 @@
 <body>
     <div id="main_page">
         <div id="header">
-            <form method="get" th:action="@{/logout}">
+            <form method="post" th:action="@{/logout}">
 
                 <button class="child" formmethod="get" formaction="/myTransactions">My Transactions</button>
                 <button class="child" style="margin-left: 10px" formmethod="get" formaction="/api/moviesApi">See Api</button>
