@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
 
-    MovieService movieService;
+    private MovieService movieService;
 
     @Autowired
     public ApiController(MovieService movieService) {
