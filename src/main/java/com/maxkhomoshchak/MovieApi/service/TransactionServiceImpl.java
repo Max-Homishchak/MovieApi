@@ -38,6 +38,12 @@ public class TransactionServiceImpl implements TransactionService{
 
         boolean result = flag.get();
 
+        if(movie.getRate() > 10) {
+            movie.setRate(10);
+        }else if(movie.getRate() < 0){
+            movie.setRate(0);
+        }
+
         if(!result){
             Transaction transaction = Transaction.builder()
                     .userName(user.getUsername())
