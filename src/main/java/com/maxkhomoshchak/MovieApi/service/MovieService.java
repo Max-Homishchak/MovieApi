@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface MovieService {
 
-    public boolean checkExistance(Movie movie);
+    public boolean checkExistence(Movie movie);
 
     public void submitMovie(Movie movie);
 

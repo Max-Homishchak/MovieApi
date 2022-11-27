@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class MovieServiceImpl implements MovieService{
         this.transactionRepository = transactionRepository;
     }
 
-    public boolean checkExistance(Movie movie){
+    public boolean checkExistence(Movie movie){
         return movieRepository.findAll().contains(movie);
     }
 
@@ -42,7 +43,7 @@ public class MovieServiceImpl implements MovieService{
             movie.setRate(0);
         }
 
-        if(checkExistance(movie)){
+        if(checkExistence(movie)){
 
             Movie movie1 = movieRepository.findByName(movieName);
 
@@ -78,7 +79,7 @@ public class MovieServiceImpl implements MovieService{
 
         List<Movie> movieList = movieRepository.findAll();
 
-        Collections.sort(movieList);
+        movieList.sort(Comparator.comparing(Movie::getVoters));
 
         return movieList;
     }
@@ -89,9 +90,7 @@ public class MovieServiceImpl implements MovieService{
         List<Transaction> transactions = transactionRepository.findAllTransactionByUsername(user.getUsername());
         System.out.println(transactions);
 
-        for(Transaction t: transactions){
-            unrateMovie(t);
-        }
+        transactions.forEach(this::unrateMovie);
 
         return transactions;
     }

@@ -32,6 +32,7 @@ public class TransactionServiceImpl implements TransactionService{
         Date date = calendar.getTime();
 
         Optional<Transaction> validatingTransaction = transactionRepository.findRepeatingTransaction(user.getUsername(), movie.getName());
+
         validatingTransaction.ifPresentOrElse((value) -> {
             flag.set(true); }, () -> {
             flag.set(false);} );
@@ -78,10 +79,7 @@ public class TransactionServiceImpl implements TransactionService{
 
         List<Transaction> transactions = movieService.unrateAllUsersMovies(user);
 
-        for(Transaction t: transactions){
-
-            transactionRepository.deleteById(t.getId());
-        }
+        transactions.forEach(t -> transactionRepository.deleteById(t.getId()));
     }
 
     @Override
@@ -94,9 +92,8 @@ public class TransactionServiceImpl implements TransactionService{
 
         List<String> result = new ArrayList<>();
 
-        for(Transaction t : transactions){
-            result.add(getDifferenceOfTime(t.getCreationTime()));
-        }
+        transactions.forEach(t -> result.add(getDifferenceOfTime(t.getCreationTime())));
+
         return result;
     }
 

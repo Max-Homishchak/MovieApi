@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Entity
 @Table(name = "Movies")
-public class Movie implements Comparable<Movie>{
+public class Movie{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +26,6 @@ public class Movie implements Comparable<Movie>{
     @Override
     public boolean equals(Object object) {
         return this.name.equals(((Movie)object).name);
-    }
-
-    public int compareTo(Movie movie) {
-
-        return movie.getVoters() - this.voters;
     }
 
 }
